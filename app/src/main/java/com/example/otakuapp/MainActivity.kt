@@ -36,14 +36,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+@Preview
 @Composable
 fun AppWithSplashScreen() {
     var showSplash by remember { mutableStateOf(true) }
 
     // Delay the splash screen for 3 seconds
     LaunchedEffect(Unit) {
-        delay(3000)
+        delay(6000)
         showSplash = false
     }
 
@@ -55,7 +55,7 @@ fun AppWithSplashScreen() {
 }
 
 
-@Preview
+
 @Composable
 fun MainApp() {
     val navController = rememberNavController()
@@ -132,15 +132,4 @@ fun ScreenContent(content: String) {
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun PreviewBottomBar() {
-    val navController = rememberNavController()
-    OtakuAppTheme {
-        Scaffold(
-            bottomBar = { AppBottomBar(navController) }
-        ) {
-            AppNavGraph(navController = navController)
-        }
-    }
-}
+

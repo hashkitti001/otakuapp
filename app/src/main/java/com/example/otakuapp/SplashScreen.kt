@@ -2,13 +2,7 @@ package com.example.otakuapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,19 +13,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
-@Preview
 @Composable
 fun SplashScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black), contentAlignment = Alignment.Center
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 modifier = Modifier
                     .height(100.dp)
@@ -39,19 +33,15 @@ fun SplashScreen() {
                 painter = painterResource(id = R.drawable.splash_logo),
                 contentDescription = "Splash logo"
             )
-            Spacer(modifier = Modifier.height(7.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
-                modifier = Modifier.padding(start = 19.dp, end = 15.dp),
-                text = "OTAKU", fontSize = 21.sp, color = Color.White
+                text = "OTAKU",
+                fontSize = 21.sp,
+                color = Color.White
             )
-
-            LaunchedEffect(Unit) {
-                delay(2000)
-//                navController.navigate("home" {
-//                    popUpTo("splash") { inclusive = true}
-//                })
-            }
         }
-
     }
+
+
 }
+
