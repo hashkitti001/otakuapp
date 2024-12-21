@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,7 +23,10 @@ fun ImageRow() {
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(7.dp),
+            .padding(7.dp)
+            .background(Color.Black)
+            .clip(RoundedCornerShape(3.dp))
+        ,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         // First Column - 1/3 of the width
@@ -160,7 +164,7 @@ fun Onboarding() {
                     modifier = Modifier
                         .width(400.dp)
                         .padding(top = 6.dp),
-                    shape = RoundedCornerShape(6.dp),
+                    shape = RoundedCornerShape(15.dp),
                     onClick = { /*TODO*/ }
                 ) {
                     Text(text = "Get Started")

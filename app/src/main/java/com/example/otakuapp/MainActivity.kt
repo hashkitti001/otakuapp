@@ -1,13 +1,16 @@
 package com.example.otakuapp
 
-import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.DownloadForOffline
 import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
@@ -27,6 +30,7 @@ import com.example.otakuapp.ui.theme.OtakuAppTheme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,6 +40,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@RequiresApi(Build.VERSION_CODES.Q)
 @Preview
 @Composable
 fun AppWithSplashScreen() {
@@ -72,16 +77,16 @@ fun MainApp() {
 }
 
 @Composable
-fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun AppNavGraph(navController: NavHostController, modifier: Modifier) {
     NavHost(
         navController = navController,
         startDestination = "home",
         modifier = modifier
     ) {
-        composable("home") { ScreenContent("Home Screen") }
+        composable("home") { HomeFeed() }
         composable("search") { ScreenContent("Search Screen") }
-        composable("favorites") { ScreenContent("Favorites Screen") }
-        composable("profile") { ScreenContent("Profile Screen") }
+        composable("downloads") { ScreenContent("Favorites Screen") }
+        composable("more") { ScreenContent("Profile Screen") }
     }
 }
 
@@ -89,9 +94,9 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
 fun AppBottomBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem("home", Icons.Rounded.Home, "Home"),
-        BottomNavItem("search", Icons.Rounded.Search, "Search"),
-        BottomNavItem("favorites", Icons.Rounded.Favorite, "Favorites"),
-        BottomNavItem("profile", Icons.Rounded.Person, "Profile")
+        BottomNavItem("search", Icons.Rounded.GridView, "Discover"),
+        BottomNavItem("downloads", Icons.Rounded.DownloadForOffline, "Downloads"),
+        BottomNavItem("more", Icons.Rounded.Person, "More")
     )
     val currentBackStack = navController.currentBackStackEntryAsState()
     val currentDestination = currentBackStack.value?.destination?.route
