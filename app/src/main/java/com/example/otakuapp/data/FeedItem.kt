@@ -1,6 +1,6 @@
 package com.example.otakuapp.data
 
-data class TrendingFeedItem(
+data class FeedItem(
     val name: String,
     val imgRes: Int,
 )
