@@ -48,7 +48,7 @@ fun AppWithSplashScreen() {
 
     // Delay the splash screen for 3 seconds
     LaunchedEffect(Unit) {
-        delay(6000)
+        delay(4000)
         showSplash = false
     }
 

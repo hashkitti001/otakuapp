@@ -4,8 +4,13 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
@@ -20,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,6 +53,15 @@ val recommendedItems = listOf(
     FeedItem(name = "My Hero Academia", imgRes = R.drawable.mha)
 )
 
+val latestItems = listOf(
+    FeedItem(name = "Cheat Skill", imgRes = R.drawable.cheat_skill),
+    FeedItem(name = "Dr. Stone", imgRes = R.drawable.dr_stone),
+    FeedItem(name = "Love is War", imgRes = R.drawable.love_is_war),
+    FeedItem(name = "Kamikatsu", imgRes = R.drawable.kamikatsu),
+    FeedItem(name = "Demon Slayer", imgRes = R.drawable.demon_slayer),
+    FeedItem(name = "My Hero Academia", imgRes = R.drawable.mha)
+)
+
 @Preview
 @Composable
 fun HomeFeed() {
@@ -58,10 +73,12 @@ fun HomeFeed() {
             .fillMaxSize()
             .background(bgGradient)
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         AccountInfoAndSearch()
         TrendingFeed()
         Recommended()
+        LatestItems()
     }
 }
 
@@ -125,12 +142,12 @@ fun TrendingFeed() {
             modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
         )
 
-        HorizontalPager(count = (trendingItems.size + itemsPerPage - 1) / itemsPerPage, state = pagerState) { page ->
+        HorizontalPager(count = (trendingItems.size + itemsPerPage) % itemsPerPage, state = pagerState) { page ->
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
+//                    .padding(horizontal = 3.dp)
             ) {
                 for (i in 0 until itemsPerPage) {
                     val index = page * itemsPerPage + i
@@ -246,7 +263,44 @@ fun RecommendedItem(item: FeedItem) {
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun LatestReleases(){
- //Latest Releases composable
+fun LatestItems() {
+    // Display 4 items per page
+    val itemsPerPage = 4
+    val pagerState = rememberPagerState()
+
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Text(
+            text = "Latest Releases",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            textAlign = TextAlign.Left,
+            modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
+        )
+
+        HorizontalPager(count = (latestItems.size + itemsPerPage - 1) / itemsPerPage, state = pagerState) { page ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp)
+            ) {
+                for (i in 0 until itemsPerPage) {
+                    val index = page * itemsPerPage + i
+                    if (index < latestItems.size) {
+                        RecommendedItem(latestItems[index])
+                    }
+                }
+            }
+        }
+
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 8.dp)
+        )
+    }
 }
