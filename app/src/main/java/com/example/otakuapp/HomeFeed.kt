@@ -248,5 +248,5 @@ fun RecommendedItem(item: FeedItem) {
 
 @Composable
 fun LatestReleases(){
-
+ //Latest Releases composable
 }
