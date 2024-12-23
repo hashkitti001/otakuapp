@@ -96,7 +96,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier) {
         composable("home") { HomeFeed() }
         composable("search") { ScreenContent("Search Screen") }
         composable("downloads") { DownloadScreen() }
-        composable("more") { ScreenContent("Profile Screen") }
+        composable("more") { MoreScreen() }
     }
 }
 
