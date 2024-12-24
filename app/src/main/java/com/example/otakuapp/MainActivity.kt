@@ -13,7 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DownloadForOffline
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -96,7 +96,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier) {
         composable("home") { HomeFeed() }
         composable("search") { ScreenContent("Search Screen") }
         composable("downloads") { DownloadScreen() }
-        composable("more") { MoreScreen() }
+        composable("settings") { SettingsScreen() }
     }
 }
 
@@ -106,7 +106,7 @@ fun AppBottomBar(navController: NavHostController) {
         BottomNavItem("home", Icons.Rounded.Home, "Home"),
         BottomNavItem("search", Icons.Rounded.GridView, "Discover"),
         BottomNavItem("downloads", Icons.Rounded.DownloadForOffline, "Downloads"),
-        BottomNavItem("more", Icons.Rounded.Person, "More")
+        BottomNavItem("settings", Icons.Rounded.Settings, "Settings")
     )
     val currentBackStack = navController.currentBackStackEntryAsState()
     val currentDestination = currentBackStack.value?.destination?.route

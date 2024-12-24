@@ -32,6 +32,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,10 +48,10 @@ val GrayFreeSpace = Color(0xFFBDBDBD)
 val BackgroundColor = Color.Black
 val TextColor = Color.White
 val LightGrayColor = Color.LightGray
-
+val interFont = FontFamily(Font(R.font.inter_variable))
 @Preview()
 @Composable
-fun MoreScreen() {
+fun SettingsScreen() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -62,17 +64,19 @@ fun MoreScreen() {
                 style = MaterialTheme.typography.titleLarge,
                 color = TextColor,
                 fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
+                fontFamily = interFont, fontSize = 30.sp,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }
 
         // Profile Section
+
         item { SectionTitle(title = "Profile") }
         item { ButtonWithArrowEnd(name = "My Account", imgRes = R.drawable.profile) }
         item { ButtonWithArrowEnd(name = "Privacy and Security", imgRes = R.drawable.securityuser) }
 
         // Downloads Section
+        item { Spacer(modifier = Modifier.height(8.dp)) }
         item { SectionTitle(title = "Downloads") }
         item {
             ButtonWithSubtitles(
@@ -85,9 +89,11 @@ fun MoreScreen() {
         item { ButtonWithArrowEnd(name = "Video Resolution", imgRes = R.drawable.icon_video) }
 
         // Storage Section
+        item { Spacer(modifier = Modifier.height(8.dp)) }
         item { SectionTitle(title = "Storage") }
         item { AppSizeVisualization() }
         item { DeleteCache() }
+        item { Spacer(modifier = Modifier.height(8.dp)) }
         item { About() }
     }
 }
@@ -99,7 +105,9 @@ fun SectionTitle(title: String) {
         text = title,
         style = MaterialTheme.typography.bodyLarge,
         color = TextColor,
-        modifier = Modifier.padding(bottom = 8.dp)
+        modifier = Modifier.padding(bottom = 8.dp),
+        fontFamily = interFont,
+        fontWeight = FontWeight.Bold
     )
 }
 
@@ -162,7 +170,8 @@ fun ButtonWithSubtitles(name: String, sub: String, imgRes: Int) {
                 Text(
                     text = sub,
                     style = MaterialTheme.typography.bodySmall,
-                    color = LightGrayColor
+                    color = LightGrayColor,
+                    fontFamily = interFont,
                 )
             }
         }
@@ -197,7 +206,8 @@ fun ButtonWithSwitch(name: String, imgRes: Int) {
             Text(
                 text = name,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextColor
+                color = TextColor,
+                fontFamily = interFont,
             )
         }
         Switch(
@@ -287,12 +297,14 @@ fun StorageRow(label: String, value: String, color: Color) {
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextColor
+                color = TextColor,
+                fontFamily = interFont,
             )
             Text(
                 text = value,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextColor
+                color = TextColor,
+                fontFamily = interFont,
             )
         }
     }
@@ -352,13 +364,15 @@ fun DeleteCache() {
                 text = "Delete cache",
                 style = MaterialTheme.typography.bodyMedium,
                 fontSize = 16.sp,
-                color = TextColor
+                color = TextColor,
+                fontFamily = interFont,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "Free up space by clearing your cache. Your downloads won’t be removed.",
                 style = MaterialTheme.typography.bodySmall,
-                color = LightGrayColor
+                color = LightGrayColor,
+                fontFamily = interFont,
             )
         }
     }
@@ -381,12 +395,14 @@ fun About() {
             Text(
                 text = "Version",
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextColor
+                color = TextColor,
+                fontFamily = interFont,
             )
             Text(
                 text = "1.0.0",
                 style = MaterialTheme.typography.bodyMedium,
-                color = LightGrayColor
+                color = LightGrayColor,
+                fontFamily = interFont,
             )
         }
     }
